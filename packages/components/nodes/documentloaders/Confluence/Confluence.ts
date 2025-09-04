@@ -190,10 +190,11 @@ class ConfluencePagesLoader extends BaseDocumentLoader {
      * @returns Promise resolving to an array of ConfluencePage objects.
      */
     private async fetchAllPagesInSpace(start = 0, label = this.label, limit = this.limit): Promise<ConfluencePage[]> {
-        let url = `${this.baseUrl}/rest/api/content/search?cql=space=${this.spaceKey}+AND+type=page&limit=${limit}&start=${start}&expand=${this.expand}`
+        let url = `${this.baseUrl}/rest/api/content/search?cql=space=${this.spaceKey}+AND+type=page`
         if (label) {
-            url += `AND+label=${label}`
+            url += `+AND+label=${label}`
         }
+        url += `&limit=${limit}&start=${start}&expand=${this.expand}`
 
         const data = await this.fetchConfluenceData(url)
 
